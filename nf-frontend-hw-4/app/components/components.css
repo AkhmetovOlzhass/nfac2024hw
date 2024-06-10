@@ -1,0 +1,67 @@
+.css-1kpgv52{
+    width: 71px;
+    height: 41px;
+    display: block;
+    position: relative;
+}
+
+.css-o7mc1q {
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    position: absolute;
+    left: -11px;
+    top: -11px;
+    -webkit-transform: translate(12px, 15px);
+    -moz-transform: translate(12px, 15px);
+    -ms-transform: translate(12px, 15px);
+    transform: translate(12px, 15px);
+    box-shadow: 0 0 0 12px #23E5DB inset;
+}
+
+.css-13xlyet {
+    width: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 38px;
+    background: #23E5DB;
+}
+
+.css-9vxyyg {
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    left: 1px;
+    top: 0;
+    -webkit-transform: translate(51px, 10px);
+    -moz-transform: translate(51px, 10px);
+    -ms-transform: translate(51px, 10px);
+    transform: translate(51px, 10px);
+}
+
+.css-9vxyyg:before, .css-9vxyyg:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 65%;
+    height: 100%;
+    background: #23E5DB;
+}
+
+.css-9vxyyg:before {
+    -webkit-transform: skewX(45deg) translate(-50%, 0);
+    -moz-transform: skewX(45deg) translate(-50%, 0);
+    -ms-transform: skewX(45deg) translate(-50%, 0);
+    transform: skewX(45deg) translate(-50%, 0);
+}
+
+.css-9vxyyg:after {
+    -webkit-transform: skewX(-45deg) translate(-50%, 0);
+    -moz-transform: skewX(-45deg) translate(-50%, 0);
+    -ms-transform: skewX(-45deg) translate(-50%, 0);
+    transform: skewX(-45deg) translate(-50%, 0);
+}
