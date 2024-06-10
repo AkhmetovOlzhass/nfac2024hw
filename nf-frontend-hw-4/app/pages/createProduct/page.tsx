@@ -72,6 +72,8 @@ const ProductCreate = () => {
 
         if(imageUploaded){
             mutation.mutate(formData);
+
+            alert("Product Created! Check console!")
         } else{
             alert("Изображение еще не загрузилось")
         }
