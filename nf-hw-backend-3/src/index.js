@@ -8,8 +8,12 @@ async function handler(event) {
   const results = [];
 
   $('.css-1apmciz').each((i, element) => {
-    const title = $(element).find('.css-u2ayx9 > .css-16v5mdi').text().trim();
-    const price = $(element).find('.css-u2ayx9 > .css-tyui9s').text().trim();
+    const title = $(element).find('.css-16v5mdi.er34gjf0').text().trim();
+    let priceText = $(element).find('.css-u2ayx9 > .css-tyui9s').text().trim();
+
+    let price = priceText.match(/[\d\s]+(?= тг)/);
+    price = price ? price[0].trim() : "Цена не указана";
+
     results.push({ title, price });
   });
 
