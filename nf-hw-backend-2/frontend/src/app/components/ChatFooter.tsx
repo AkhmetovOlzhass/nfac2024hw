@@ -20,8 +20,8 @@ const ChatFooter: React.FC<ChatFooterProps> = ({ roomId }) => {
 
     const sendMessage = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (message.trim()) {
-            socket.emit('send_message', { text: message, roomId, name: userId, messageUser: userName });
+        if (message.trim() && localStorage.getItem('userName')) {
+            socket.emit('send_message', { text: message, roomId, username: localStorage.getItem('userName'), messageId: userId });
             setMessage('');
         }
     };

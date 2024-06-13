@@ -9,18 +9,17 @@ export const useSocket = () => useContext(SocketContext);
 
 export const SocketProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     const [socket, setSocket] = useState<Socket | null>(null);
-    const userId = localStorage.getItem('id')
 
     useEffect(() => {
-        const newSocket = io('http://localhost:5000', { autoConnect: true,   query: {
-            userId: userId
-          } });
-        
-        setSocket(newSocket);
+        if (typeof window !== 'undefined') { // Ensure this runs only in the browser
+            const userId = localStorage.getItem('id');
+            const newSocket = io('http://localhost:5000', { autoConnect: true, query: { userId } });
+            setSocket(newSocket);
 
-        return () => {
-            newSocket.close();
-        };
+            return () => {
+                newSocket.close();
+            };
+        }
     }, []);
 
     return (
