@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000'
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://nfac2024hw-production.up.railway.app' : 'http://localhost:5000';
 // http://localhost:5000
 
 const AuthContext = createContext(undefined);
