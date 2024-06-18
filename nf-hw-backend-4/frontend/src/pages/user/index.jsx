@@ -31,7 +31,7 @@ const UserDetails = () => {
 
   const toggleFavorite = async (songId) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/v5/songs/${artistId}/favorite`, { songId });
+      const response = await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${artistId}/favorite`, { songId });
       if (response.status === 200) {
         setNowUser(prev => ({ ...prev, favorites: response.data.favorites }));
       } else {
@@ -89,7 +89,7 @@ const UserDetails = () => {
 
   const onPlaylistSelect = async (playlistId, songId) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/v5/songs/${playlistId}/add-song`, { songId });
+      const response = await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${playlistId}/add-song`, { songId });
       if (response.status === 200) {
         console.log('Song added to playlist successfully');
         setModalOpen(false);
@@ -108,7 +108,7 @@ const UserDetails = () => {
 
   const handleDeleteClick = async (songId) => {
     try {
-        await axios.delete(`http://localhost:5000/api/v5/songs/${songId}`);
+        await axios.delete(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${songId}`);
         setSongs(songs.filter(song => song._id !== songId));
       } catch (error) {
         console.error('Failed to delete song:', error);

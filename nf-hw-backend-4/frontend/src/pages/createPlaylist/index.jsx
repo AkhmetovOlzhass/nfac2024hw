@@ -30,7 +30,7 @@ const CreatePlaylist = () => {
     setUploadStatus('Uploading...');
 
     try {
-      await axios.post(`http://localhost:5000/api/v5/songs/playlist`, formData);
+      await axios.post(`https://nfac2024hw-production.up.railway.app/api/v5/songs/playlist`, formData);
       setPlaylistName('')
       setPlaylistDescr('');
       setPlaylistCover(null)

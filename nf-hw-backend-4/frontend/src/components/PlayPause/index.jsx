@@ -4,7 +4,7 @@ import { useAudioPlayer } from '../../context/PlayerContext';
 import { io } from 'socket.io-client';
 import { useAuth } from '../../context/AuthContext';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://nfac2024hw-production.up.railway.app');
 
 
 

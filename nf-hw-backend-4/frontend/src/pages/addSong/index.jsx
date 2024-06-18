@@ -17,7 +17,7 @@ const AddSong = () => {
   const coverImageInputRef = useRef(null);
 
   // useEffect(() => {
-  //   axios.get('http://localhost:5000/api/v5/songs/songs').then(response => setSongs(response.data));
+  //   axios.get('https://nfac2024hw-production.up.railway.app/api/v5/songs/songs').then(response => setSongs(response.data));
   // }, []);
 
   const handleSubmit = async (e) => {
@@ -31,7 +31,7 @@ const AddSong = () => {
     setUploadStatus('Wait please...');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/v5/songs/upload', formData, {
+      const response = await axios.post('https://nfac2024hw-production.up.railway.app/api/v5/songs/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -22,7 +22,7 @@ const Playlist = () => {
 
     const toggleFavorite = async (songId) => {
       try {
-        const response = await axios.put(`http://localhost:5000/api/v5/songs/${artistId}/favorite`, { songId });
+        const response = await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${artistId}/favorite`, { songId });
         if (response.status === 200) {
           setUser(prev => ({ ...prev, favorites: response.data.favorites }));
         } else {
@@ -40,7 +40,7 @@ const Playlist = () => {
 
     const onPlaylistSelect = async (playlistId, songId) => {
         try {
-            const response = await axios.put(`http://localhost:5000/api/v5/songs/${playlistId}/add-song`, { songId });
+            const response = await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${playlistId}/add-song`, { songId });
             if (response.status === 200) {
                 console.log('Song added to playlist successfully');
                 setModalOpen(false);

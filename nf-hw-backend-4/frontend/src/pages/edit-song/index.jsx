@@ -29,7 +29,7 @@ const EditSong = () => {
     setUploadStatus('Uploading...');
 
     try {
-      await axios.put(`http://localhost:5000/api/v5/songs/${id}`, formData);
+      await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${id}`, formData);
       setTitle('')
       setSongFile(null);
       setCoverImageFile(null)

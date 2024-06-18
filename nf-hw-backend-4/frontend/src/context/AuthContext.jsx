@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (email, password, username) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/v5/auth/register', {email, password, username });
+            const response = await axios.post('https://nfac2024hw-production.up.railway.app/api/v5/auth/register', {email, password, username });
             
             console.log(response);
             navigate('/signin'); 
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/v5/auth/login', { email, password });
+            const response = await axios.post('https://nfac2024hw-production.up.railway.app/api/v5/auth/login', { email, password });
             console.log(response.data);
             const { accessToken, user } = response.data;
             localStorage.setItem('token', accessToken);
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUsers = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v5/users/users`);
+            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/users/users`);
             return response.data;
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUserById = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v5/users/${id}`);
+            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/users/${id}`);
             return response.data;
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }) => {
 
     const getSongsById = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v5/songs/${id}`);
+            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${id}`);
             return response.data;
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
@@ -104,7 +104,7 @@ export const AuthProvider = ({ children }) => {
     };
     const getSongById = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v5/songs/playlist/${id}`);
+            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/songs/playlist/${id}`);
             return response.data;
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
 
     const getPlaylists = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v5/songs/playlists`);
+            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/songs/playlists`);
             return response.data;
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
@@ -122,7 +122,7 @@ export const AuthProvider = ({ children }) => {
 
     const getAllSongs = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v5/songs/songs`);
+            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/songs/songs`);
             return response.data;
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
