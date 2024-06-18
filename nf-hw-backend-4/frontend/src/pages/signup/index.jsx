@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from '../../context/AuthContext';
+import { useService } from "../../context/Service";
 
 export const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,7 +13,7 @@ export const Signup = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const { register } = useAuth();
+  const { register } = useService();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

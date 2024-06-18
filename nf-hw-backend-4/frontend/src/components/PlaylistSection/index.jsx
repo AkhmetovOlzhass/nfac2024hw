@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PlaylistsCard } from "../PlaylistCard";
-import { useAuth } from "../../context/AuthContext";
+import { useService } from "../../context/Service";
 
 export const Playlistsection = ({ type }) => {
 
-  const {getPlaylists} = useAuth();
+  const {getPlaylists} = useService();
 
   const [playlists, setPlaylists] = useState([]);
 

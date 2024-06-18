@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import { useService } from '../../context/Service';
 
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
 
 
 
@@ -20,7 +19,7 @@ const EditUser = () => {
   
   const navigate = useNavigate();
 
-  const {artistId} = useAuth()
+  const {artistId, updateUser} = useService()
 
   useEffect(() => {
     if(artistId && id != artistId){
@@ -41,8 +40,7 @@ const EditUser = () => {
     setUploadStatus('Uploading...');
 
     try {
-      await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/users/${id}`, formData);
-
+      await updateUser(id, formData)
       localStorage.setItem('username', username);
 
       setUsername('')

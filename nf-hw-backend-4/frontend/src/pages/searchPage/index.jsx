@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import defaultImg from '../../assets/default-avatar.png'
 
-import Header from "../../components/Header";
-import Sidebar from "../../components/Sidebar";
 import PlayPauseButton from '../../components/PlayPause'
-import { useAuth } from "../../context/AuthContext";
+import { useService } from "../../context/Service";
 
 const SearchPage = () => {
     const [query, setQuery] = useState('');
@@ -15,7 +12,7 @@ const SearchPage = () => {
     const [filteredResults, setFilteredResults] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
 
-    const {getUsers, getAllSongs} = useAuth()
+    const {getUsers, getAllSongs} = useService()
 
     useEffect(() => {
         const fetchSongs = async () => {

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useAuth } from '../../context/AuthContext';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
+import { useService } from '../../context/Service';
 
 const AddSong = () => {
   const [songs, setSongs] = useState([]);
@@ -11,14 +9,10 @@ const AddSong = () => {
   const [coverImage, setCoverImage] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
 
-  const {username, artistId} = useAuth();
+  const {username, artistId, createSong} = useService();
 
   const fileInputRef = useRef(null);
   const coverImageInputRef = useRef(null);
-
-  // useEffect(() => {
-  //   axios.get('https://nfac2024hw-production.up.railway.app/api/v5/songs/songs').then(response => setSongs(response.data));
-  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,11 +25,7 @@ const AddSong = () => {
     setUploadStatus('Wait please...');
 
     try {
-      const response = await axios.post('https://nfac2024hw-production.up.railway.app/api/v5/songs/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = createSong(formData);
       setSongs([...songs, response.data]);
       setTitle('');
       setFile(null);

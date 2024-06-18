@@ -2,15 +2,17 @@ import React from 'react';
 import { RiPlayFill, RiPauseFill } from "react-icons/ri";
 import { useAudioPlayer } from '../../context/PlayerContext';
 import { io } from 'socket.io-client';
-import { useAuth } from '../../context/AuthContext';
+import { useService } from '../../context/Service';
 
-const socket = io('https://nfac2024hw-production.up.railway.app');
+
 
 
 
 const PlayPauseButton = ({ song }) => {
   const { playTrack, pauseTrack, isPlaying } = useAudioPlayer();
-  const {artistId} = useAuth();
+  const {artistId, BASE_URL} = useService();
+
+  const socket = io(BASE_URL);
   
   const handlePlayPause = () => {
     if (isPlaying) {

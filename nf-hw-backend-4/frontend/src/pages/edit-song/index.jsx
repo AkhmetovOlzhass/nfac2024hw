@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useService } from '../../context/Service';
 
-import axios from 'axios';
-
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
 
 
 
@@ -14,6 +11,8 @@ const EditSong = () => {
   const [songFile, setSongFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
   const [coverImageFile, setCoverImageFile] = useState(null);
+
+  const {updateSong} = useService();
 
 
   const songFileInputRef = useRef(null);
@@ -29,7 +28,7 @@ const EditSong = () => {
     setUploadStatus('Uploading...');
 
     try {
-      await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${id}`, formData);
+      await updateSong(id, formData);
       setTitle('')
       setSongFile(null);
       setCoverImageFile(null)

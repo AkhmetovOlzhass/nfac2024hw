@@ -6,6 +6,7 @@ import connectDB from './db';
 import cors from 'cors';
 import globalRouter from './routes/global-router';
 import { logger } from './logger';
+import 'dotenv/config';
 
 connectDB();
 
@@ -18,8 +19,14 @@ app.use((req, res, next) => {
   next();
 });
 
+
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://nfac2024hw.vercel.app' : 'http://localhost:3000';
+
+// http://localhost:3000
+//'https://nfac2024hw.vercel.app'
+
 app.use(cors({
-  origin: 'https://nfac2024hw.vercel.app',
+  origin: BASE_URL,
   credentials: true
 }));
 
@@ -30,7 +37,7 @@ app.use('/api/v5', globalRouter);
 const httpServer = createServer(app);
 const io = new SocketServer(httpServer, {
   cors: {
-    origin: "https://nfac2024hw.vercel.app",
+    origin: BASE_URL,
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true
@@ -51,5 +58,5 @@ io.on('connection', (socket) => {
 });
 
 httpServer.listen(5000, () => {
-  console.log('Server running at https://nfac2024hw.vercel.app/api/v5');
+  console.log(`Server running at ${BASE_URL}`);
 });

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import defaultAvatar from '../../assets/default-avatar.png';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar'
 
 import Modal from '../../components/modal';
 import Song from '../../components/song';
+import { useService } from '../../context/Service';
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -26,21 +23,9 @@ const UserDetails = () => {
     setModalOpen(true);
     setCurrentSongId(songId); 
   };
+  
 
-  const {getUserById, getSongsById, artistId, getPlaylists} = useAuth()
-
-  const toggleFavorite = async (songId) => {
-    try {
-      const response = await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${artistId}/favorite`, { songId });
-      if (response.status === 200) {
-        setNowUser(prev => ({ ...prev, favorites: response.data.favorites }));
-      } else {
-        console.error('Error updating favorite status:', response.data);
-      }
-    } catch (error) {
-      console.error('Failed to toggle favorite status:', error);
-    }
-  };
+  const {getUserById, getSongsById, artistId, getPlaylists, toggleFavorite, onPlaylistSelect, deleteClick} = useService()
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -86,33 +71,32 @@ const UserDetails = () => {
 
   }, [id, getUserById]);
 
-
-  const onPlaylistSelect = async (playlistId, songId) => {
-    try {
-      const response = await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${playlistId}/add-song`, { songId });
-      if (response.status === 200) {
-        console.log('Song added to playlist successfully');
-        setModalOpen(false);
-      }
-    } catch (error) {
-      console.error('Failed to add song to playlist:', error);
+  const handleToggleFavorite = async (songsId) => {
+    const response = await toggleFavorite(songsId)
+    if(response){
+      setNowUser(prev => ({ ...prev, favorites: response.data.favorites }));
     }
-  };
+  }
+
+  const handleOnPlaylistSelect = async (playlistId, songId) => {
+    const response = await onPlaylistSelect(playlistId, songId)
+    if (response.status === 200) {
+      console.log('Song added to playlist successfully');
+      setModalOpen(false);
+    }
+  }
+
+  const handleDeleteClick = async (songId) => {
+    await deleteClick(songId);
+    setSongs(songs.filter(song => song._id !== songId));
+  }
+
 
   const handleEditClick = (songId) => {
     navigate(`/editSong/${songId}`);
   };
   const handleEditUserClick = (userId) => {
     navigate(`/editUser/${userId}`);
-  };
-
-  const handleDeleteClick = async (songId) => {
-    try {
-        await axios.delete(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${songId}`);
-        setSongs(songs.filter(song => song._id !== songId));
-      } catch (error) {
-        console.error('Failed to delete song:', error);
-      }
   };
 
   if (!user) {
@@ -154,9 +138,9 @@ const UserDetails = () => {
             {songs && songs.length > 0 ? (
                 <ul>
                 {songs.map((song) => (
-                  <Song key={song._id} song={song} isOwner={isOwner} handleDeleteClick={handleDeleteClick} handleEditClick={handleEditClick} handleAddToPlaylistClick={handleAddToPlaylistClick} toggleFavorite={toggleFavorite} favorites={nowUser ? nowUser.favorites : null} />
+                  <Song key={song._id} song={song} isOwner={isOwner} handleDeleteClick={handleDeleteClick} handleEditClick={handleEditClick} handleAddToPlaylistClick={handleAddToPlaylistClick} toggleFavorite={handleToggleFavorite} favorites={nowUser ? nowUser.favorites : null} />
                   ))}
-                  <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} onPlaylistSelect={onPlaylistSelect} songId={currentSongId}>
+                  <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} onPlaylistSelect={handleOnPlaylistSelect} songId={currentSongId}>
                     {playlists} 
                   </Modal>
                 </ul>

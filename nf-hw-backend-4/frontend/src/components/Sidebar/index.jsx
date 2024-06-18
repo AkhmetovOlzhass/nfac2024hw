@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiLibrary } from "react-icons/bi";
 import { HiMagnifyingGlass } from "react-icons/hi2";
-import { RiAddBoxLine, RiCloseLine, RiHeartFill } from "react-icons/ri";
+import { RiAddBoxLine, RiHeartFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import UsersActivity from "../UsersAcitvity";
 

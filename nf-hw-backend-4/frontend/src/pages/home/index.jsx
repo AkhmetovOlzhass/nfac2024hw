@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Artistsection } from "../../components/Artistsection";
-import Header from "../../components/Header";
 import { Playlistsection } from "../../components/PlaylistSection";
-import Sidebar from "../../components/Sidebar";
 import "./Home.css";
 import { Footer } from "../../components/footer";
 
@@ -20,9 +18,6 @@ export const Home = () => {
         <Playlistsection type={'Party Time'}></Playlistsection>
         <Playlistsection type={'Classical Essentials'}></Playlistsection>
         <Playlistsection type={'Indie Hits'}></Playlistsection>
-        {/* <Playlistsection></Playlistsection>
-        <Playlistsection></Playlistsection>
-        <Playlistsection></Playlistsection> */}
         <Footer></Footer>
       </div>
     </div>

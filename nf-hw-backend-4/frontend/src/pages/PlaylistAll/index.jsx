@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { PlaylistsCard } from "../../components/PlaylistCard";
-import { useAuth } from '../../context/AuthContext';
+import { useService } from "../../context/Service";
 
 const PlaylistAll = () => {
 
     const location = useLocation()
     const { type } = location.state;
     
-    const {getPlaylists} = useAuth();
+    const {getPlaylists} = useService();
 
     const [playlists, setPlaylists] = useState([]);
   

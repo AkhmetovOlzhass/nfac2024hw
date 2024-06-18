@@ -19,12 +19,14 @@ import Favorites from "../pages/favorites"
 import Artists from "../pages/artists"
 import LibraryPage from "../pages/libraryPage";
 import Playlists from "../pages/playlists";
+import { ServiceProvider } from "../context/Service";
 
 export const RouteList = () => {
 
 
   return (
     <AuthProvider>
+      <ServiceProvider>
         <PlayerProvider>
           <Header />
           <Sidebar />
@@ -47,6 +49,7 @@ export const RouteList = () => {
             <Route path="/searchPage" element={<SearchPage />} />
           </Routes>
         </PlayerProvider>
+      </ServiceProvider>
     </AuthProvider>
   );
 };

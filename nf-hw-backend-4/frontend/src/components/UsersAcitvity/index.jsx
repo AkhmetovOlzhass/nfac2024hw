@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useService } from '../../context/Service';
 import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
 
 export default function UsersActivity() {
   const [users, setUsers] = useState([]);
-  const { getUsers } = useAuth();
+  const { getUsers, BASE_URL } = useService();
 
 
 
   useEffect(() => {
-    const socket = io('https://nfac2024hw-production.up.railway.app');
+    const socket = io(`${BASE_URL}`);
 
     const fetchUsers = async () => {
       const fetchedUsers = await getUsers();

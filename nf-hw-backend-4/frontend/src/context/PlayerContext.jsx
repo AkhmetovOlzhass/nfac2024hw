@@ -4,7 +4,8 @@ import { io } from 'socket.io-client';
 import { useAuth } from './AuthContext';
 
 const AudioPlayerContext = createContext();
-const socket = io('https://nfac2024hw-production.up.railway.app');
+
+
 
 export const useAudioPlayer = () => useContext(AudioPlayerContext);
 
@@ -12,7 +13,9 @@ export const PlayerProvider = ({ children }) => {
   const [currentTrack, setCurrentTrackUrl] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(new Audio());
-  const {artistId} = useAuth();
+  const {artistId, BASE_URL} = useAuth();
+
+  const socket = io(`${BASE_URL}`);
 
   const playTrack = (song) => {
     setCurrentTrackUrl(song);

@@ -2,6 +2,9 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const BASE_URL = 'http://localhost:5000'
+// http://localhost:5000
+
 const AuthContext = createContext(undefined);
 
 export const useAuth = () => {
@@ -41,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (email, password, username) => {
         try {
-            const response = await axios.post('https://nfac2024hw-production.up.railway.app/api/v5/auth/register', {email, password, username });
+            const response = await axios.post(`${BASE_URL}/api/v5/auth/register`, {email, password, username });
             
             console.log(response);
             navigate('/signin'); 
@@ -53,7 +56,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = await axios.post('https://nfac2024hw-production.up.railway.app/api/v5/auth/login', { email, password });
+            const response = await axios.post(`${BASE_URL}/api/v5/auth/login`, { email, password });
             console.log(response.data);
             const { accessToken, user } = response.data;
             localStorage.setItem('token', accessToken);
@@ -76,61 +79,8 @@ export const AuthProvider = ({ children }) => {
         navigate('/signin');
     };
 
-    const getUsers = async () => {
-        try {
-            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/users/users`);
-            return response.data;
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-    };
-
-    const getUserById = async (id) => {
-        try {
-            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/users/${id}`);
-            return response.data;
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-    };
-
-    const getSongsById = async (id) => {
-        try {
-            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${id}`);
-            return response.data;
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-    };
-    const getSongById = async (id) => {
-        try {
-            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/songs/playlist/${id}`);
-            return response.data;
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-    };
-
-    const getPlaylists = async () => {
-        try {
-            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/songs/playlists`);
-            return response.data;
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-    };
-
-    const getAllSongs = async () => {
-        try {
-            const response = await axios.get(`https://nfac2024hw-production.up.railway.app/api/v5/songs/songs`);
-            return response.data;
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-    };
-
     return (
-        <AuthContext.Provider value={{ authToken, login, logout, register, username, artistId, getUserById, getSongsById, getUsers, getPlaylists, getSongById, getAllSongs }}>
+        <AuthContext.Provider value={{ authToken, login, logout, register, username, artistId, BASE_URL }}>
             {children}
         </AuthContext.Provider>
     );

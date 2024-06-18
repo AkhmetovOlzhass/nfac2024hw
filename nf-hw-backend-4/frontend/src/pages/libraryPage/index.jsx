@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
 import Song from "../../components/song";
 import Modal from "../../components/modal";
-import axios from "axios";
+import { useService } from "../../context/Service";
 
 const LibraryPage = () => {
 
-    const {getAllSongs, artistId, getPlaylists, getUserById} = useAuth();
+    const {getAllSongs, artistId, getPlaylists, getUserById, toggleFavorite, onPlaylistSelect} = useService();
 
     const [modalOpen, setModalOpen] = useState(false);
     const [songs, setSongs] = useState([]);
@@ -52,30 +51,20 @@ const LibraryPage = () => {
         setCurrentSongId(songId);
     };
 
-    const toggleFavorite = async (songId) => {
-        try {
-          const response = await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${artistId}/favorite`, { songId });
-          if (response.status === 200) {
-            setUser(prev => ({ ...prev, favorites: response.data.favorites }));
-          } else {
-            console.error('Error updating favorite status:', response.data);
-          }
-        } catch (error) {
-          console.error('Failed to toggle favorite status:', error);
+    const handleToggleFavorite = async (songsId) => {
+        const response = await toggleFavorite(songsId)
+        if(response){
+          setUser(prev => ({ ...prev, favorites: response.data.favorites }));
         }
-    };
+      }
 
-    const onPlaylistSelect = async (playlistId, songId) => {
-        try {
-            const response = await axios.put(`https://nfac2024hw-production.up.railway.app/api/v5/songs/${playlistId}/add-song`, { songId });
-            if (response.status === 200) {
-                console.log('Song added to playlist successfully');
-                setModalOpen(false);
-            }
-        } catch (error) {
-            console.error('Failed to add song to playlist:', error);
+      const handleOnPlaylistSelect = async (playlistId, songId) => {
+        const response = await onPlaylistSelect(playlistId, songId);
+        if (response.status === 200) {
+          console.log('Song added to playlist successfully');
+          setModalOpen(false);
         }
-    };
+      }
 
     return(
     <div className="min-h-screen text-gray-300">
@@ -86,9 +75,9 @@ const LibraryPage = () => {
                 {songs && songs.length > 0 ? (
                 <ul>
                     {songs.map((song) => (
-                        <Song key={song._id} song={song} isOwner={null} handleDeleteClick={null} handleEditClick={null} handleAddToPlaylistClick={handleAddToPlaylistClick} toggleFavorite={toggleFavorite} favorites={user ? user.favorites : null} />
+                        <Song key={song._id} song={song} isOwner={null} handleDeleteClick={null} handleEditClick={null} handleAddToPlaylistClick={handleAddToPlaylistClick} toggleFavorite={handleToggleFavorite} favorites={user ? user.favorites : null} />
                     ))}
-                    <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} onPlaylistSelect={onPlaylistSelect} songId={currentSongId}>
+                    <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} onPlaylistSelect={handleOnPlaylistSelect} songId={currentSongId}>
                         {allPlaylists} 
                     </Modal>
                 </ul>

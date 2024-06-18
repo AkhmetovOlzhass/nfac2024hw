@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState, useRef } from 'react';
 
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
+import { useService } from '../../context/Service';
 
 
 
 const CreatePlaylist = () => {
-    const {artistId} = useAuth();
+    const {artistId, createPlaylist} = useService();
+    
   const [playlistName, setPlaylistName] = useState('');
   const [playlistDescr, setPlaylistDescr] = useState('');
   const [playlistCover, setPlaylistCover] = useState(null);
@@ -30,7 +26,7 @@ const CreatePlaylist = () => {
     setUploadStatus('Uploading...');
 
     try {
-      await axios.post(`https://nfac2024hw-production.up.railway.app/api/v5/songs/playlist`, formData);
+      createPlaylist(formData)
       setPlaylistName('')
       setPlaylistDescr('');
       setPlaylistCover(null)

@@ -2,18 +2,17 @@ import React from "react";
 import {
   RiArrowLeftSLine,
   RiArrowRightSLine,
-  RiMore2Fill,
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-import { useAuth } from '../../context/AuthContext';
+import { useService } from "../../context/Service";
 import { useNavigate } from "react-router-dom";
 import logoutImg from '../../assets/logout.svg'
 
 const Header = () => {
 
   const navigate = useNavigate();
-  const { authToken, username, artistId, logout } = useAuth();
+  const { authToken, username, artistId, logout } = useService();
 
   const handleGoBack = () => {
     navigate(-1);

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArtistsCard } from "../ArtistsCard";
 import "./Artistsection.css";
-import { useAuth } from "../../context/AuthContext";
+import { useService } from "../../context/Service";
 
 export const Artistsection = ({ title }) => {
 
   const [artists, setArtists] = useState([]);
 
-  const {getUsers} = useAuth();
+  const {getUsers} = useService();
 
   useEffect(() => {
     const fetchUsers = async () => {
