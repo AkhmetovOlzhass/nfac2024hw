@@ -7,7 +7,10 @@ import cors from 'cors';
 import globalRouter from './routes/global-router';
 import { logger } from './logger';
 
-connectDB();
+connectDB().catch(err => {
+  console.error("Database connection failed", err);
+  process.exit(1);
+});
 
 const app = express();
 
@@ -50,6 +53,6 @@ io.on('connection', (socket) => {
   });
 });
 
-httpServer.listen(5000, () => {
-  console.log('Server running at https://nfac2024hw-ehsp.vercel.app');
+httpServer.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running at https://nfac2024hw-ehsp.vercel.app on port ${process.env.PORT || 5000}`);
 });
