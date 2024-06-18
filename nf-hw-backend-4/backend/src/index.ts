@@ -23,7 +23,9 @@ app.use((req, res, next) => {
 
 app.use(cors({
   origin: 'https://nfac2024hw-ehsp.vercel.app',
-  credentials: true
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json());
@@ -34,7 +36,7 @@ const httpServer = createServer(app);
 const io = new SocketServer(httpServer, {
   cors: {
     origin: "https://nfac2024hw-ehsp.vercel.app",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
   }
