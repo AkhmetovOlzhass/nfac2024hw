@@ -38,6 +38,14 @@ const Sidebar = () => {
                 <HiMagnifyingGlass className="text-2xl" /> Search
               </Link>
             </li>
+            <li>
+              <Link
+                to="/playlists"
+                className="flex items-center gap-4 hover:text-gray-100 transition-colors"
+              >
+                <BiLibrary className="text-2xl" /> Playlists
+              </Link>
+            </li>
             <li className="mb-8">
               <Link
                 to="/library"
@@ -46,6 +54,7 @@ const Sidebar = () => {
                 <BiLibrary className="text-2xl" /> Library
               </Link>
             </li>
+
             <li>
               <Link
                 to="/createPlaylist"

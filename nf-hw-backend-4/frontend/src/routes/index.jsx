@@ -18,6 +18,7 @@ import PlaylistAll from "../pages/PlaylistAll"
 import Favorites from "../pages/favorites"
 import Artists from "../pages/artists"
 import LibraryPage from "../pages/libraryPage";
+import Playlists from "../pages/playlists";
 
 export const RouteList = () => {
 
@@ -41,6 +42,7 @@ export const RouteList = () => {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/library" element={<LibraryPage />} />
+            <Route path="/playlists" element={<Playlists />} />
 
             <Route path="/searchPage" element={<SearchPage />} />
           </Routes>

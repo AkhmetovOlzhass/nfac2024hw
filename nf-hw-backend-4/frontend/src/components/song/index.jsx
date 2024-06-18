@@ -1,4 +1,5 @@
 import PlayPauseButton from '../../components/PlayPause';
+import { Link } from 'react-router-dom';
 
 const Song = ({song, isOwner, handleDeleteClick, handleEditClick, handleAddToPlaylistClick, toggleFavorite, favorites }) => {
     const isFavorite = favorites ? favorites.includes(song._id) : null
@@ -13,7 +14,7 @@ const Song = ({song, isOwner, handleDeleteClick, handleEditClick, handleAddToPla
             <PlayPauseButton song={song} />
             <div className='w-full'>
                 <div className="flex-grow mb-2">
-                    <div className="text-lg font-semibold flex items-center justify-between">{song.title} - {song.artist}
+                    <div className="text-lg font-semibold flex items-center justify-between"><div>{song.title} - <Link className=' underline' to={`/user/${song.artistId}`}>{song.artist}</Link></div>
                         <div>
                         {isOwner ? <button
                             onClick={() => handleEditClick(song._id)}
