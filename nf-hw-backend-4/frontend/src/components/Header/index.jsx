@@ -30,10 +30,6 @@ const Header = () => {
         </div>
       </div>
 
-      <Link to="/addSong">
-        Add song
-      </Link>
-
         {!authToken ? (
             <div className="flex items-center gap-6">
               <Link to="/signup" className="hover:text-white transition-colors">
