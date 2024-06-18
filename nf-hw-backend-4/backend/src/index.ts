@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'nfac2024hw-ehsp.vercel.app',
   credentials: true
 }));
 
@@ -30,7 +30,7 @@ app.use('/api/v5', globalRouter);
 const httpServer = createServer(app);
 const io = new SocketServer(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "nfac2024hw-ehsp.vercel.app",
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true
@@ -51,5 +51,5 @@ io.on('connection', (socket) => {
 });
 
 httpServer.listen(5000, () => {
-  console.log('Server running at http://localhost:5000/api/v5');
+  console.log('Server running at nfac2024hw-ehsp.vercel.app');
 });
