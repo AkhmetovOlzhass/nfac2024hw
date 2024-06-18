@@ -1,7 +1,0 @@
-dist
-node_modules
-*.json
-Dockerfile
-README.md
-*.sh
-*.d.ts
