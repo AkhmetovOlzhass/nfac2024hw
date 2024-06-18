@@ -35,7 +35,7 @@ const io = new SocketServer(httpServer, {
   cors: {
     origin: "https://nfac2024hw-ehsp.vercel.app",
     methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
   }
 });
