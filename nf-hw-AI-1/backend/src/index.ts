@@ -15,7 +15,7 @@ app.use(express.json());
 const httpServer = createServer(app);
 const io = new SocketIOServer(httpServer, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://nfac2024hw-bbzx.vercel.app",
         methods: ["GET", "POST"]
     }
 });
