@@ -13,7 +13,7 @@ const MessageSchema = new mongoose.Schema({
     timestamp: { type: Date, default: Date.now }
 });
 
-export const Message = mongoose.model('Message', MessageSchema);
+const Message = mongoose.model('Message', MessageSchema);
 
 function setupSocket(io) {
   io.on('connection', (socket) => {
@@ -49,4 +49,4 @@ function setupSocket(io) {
   });
 }
 
-module.exports = { setupSocket };
+export { setupSocket , Message}

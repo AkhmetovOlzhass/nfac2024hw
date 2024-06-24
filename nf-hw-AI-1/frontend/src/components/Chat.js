@@ -7,7 +7,7 @@ function Chat() {
     const [socket, setSocket] = useState(null);
 
     useEffect(() => {
-        const newSocket = io('https://respectful-learning-chatbot.up.railway.app');
+        const newSocket = io('https://respectful-learning-chatbot.up.railway.app'); // https://respectful-learning-chatbot.up.railway.app
         setSocket(newSocket);
 
         newSocket.on('receive_message', (message) => {
